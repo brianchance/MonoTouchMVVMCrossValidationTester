@@ -1,4 +1,4 @@
-MonoTouchValidationTester
+MonoTouch+MVVMCross ValidationTester
 =========================
 
 Project to explore the various options for validating models, storing errors and providing feedback with MonoTouch using MVVMCross binding.
