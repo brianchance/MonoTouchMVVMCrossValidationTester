@@ -1,17 +1,12 @@
-using System;
 using System.Drawing;
-using System.Text.RegularExpressions;
-using Cirrious.CrossCore.Platform;
-using Cirrious.MvvmCross.Binding.Binders;
 using Cirrious.MvvmCross.Binding.BindingContext;
 using Cirrious.MvvmCross.Touch.Views;
-using MonoTouch.CoreFoundation;
 using MonoTouch.UIKit;
 using MonoTouch.Foundation;
 using Validation.Core.ViewModels;
 using Validation.Touch.UI;
 
-namespace Validation.Touch
+namespace Validation.Touch.Views
 {
 	[Register("MainView")]
 	public class MainView : MvxViewController
@@ -39,16 +34,16 @@ namespace Validation.Touch
 			base.ViewDidLoad();
 			View.BackgroundColor = UIColor.White;
 
-			var moneyField = new MyUIMoneyTextField(new RectangleF(10, 10, 300, 30))
+			var someMoneyField = new MyUIMoneyTextField(new RectangleF(10, 10, 300, 30))
 				                 {
 					                 Placeholder = "How much?",
 					                 BorderStyle = UITextBorderStyle.RoundedRect,
 					                 ReturnKeyType = UIReturnKeyType.Next
 				                 };
-			View.AddSubview(moneyField);
+			View.AddSubview(someMoneyField);
 
-			var moneyErrorLabel = new MyUIErrorLabel(new RectangleF(10, 40, 300, 30));
-			View.AddSubview(moneyErrorLabel);
+			var someMoneyErrorLabel = new MyUIErrorLabel(new RectangleF(10, 40, 300, 30));
+			View.AddSubview(someMoneyErrorLabel);
 
 			var forWhatfield = new MyUITextField(new RectangleF(10, 80, 300, 30))
 				                   {
@@ -61,19 +56,34 @@ namespace Validation.Touch
 			var forWhatErrorLabel = new MyUIErrorLabel(new RectangleF(10, 110, 300, 30));
 			View.AddSubview(forWhatErrorLabel);
 
+			var moreMoneyField = new UITextFieldWithErrorText(new RectangleF(10, 140, 300, 30))
+			{
+				Placeholder = "How much more?",
+				BorderStyle = UITextBorderStyle.RoundedRect,
+				ReturnKeyType = UIReturnKeyType.Next
+			};
+			View.AddSubview(moreMoneyField);
+
+			var moreMoneyErrorLabel = new MyUIErrorLabel(new RectangleF(10, 170, 300, 30));
+			View.AddSubview(moreMoneyErrorLabel);
+
 			var button = UIButton.FromType(UIButtonType.RoundedRect);
-			button.Frame = new RectangleF(10, 150, 300, 30);
+			button.Frame = new RectangleF(10, 200, 300, 30);
 			button.SetTitle("Go get it", UIControlState.Normal);
 			View.AddSubview(button);
 
 			var set = this.CreateBindingSet<MainView, MainViewModel>();
-			set.Bind(moneyField).To(vm => vm.SomeMoney);
-			set.Bind(moneyField).For(f => f.ErrorText).To(vm => vm.Errors["SomeMoney"]);
-			set.Bind(moneyErrorLabel).To(vm => vm.Errors["SomeMoney"]);
+			set.Bind(someMoneyField).To(vm => vm.SomeMoney);
+			set.Bind(someMoneyField).For(f => f.ErrorText).To(vm => vm.Errors["SomeMoney"]);
+			set.Bind(someMoneyErrorLabel).To(vm => vm.Errors["SomeMoney"]);
 
 			set.Bind(forWhatfield).To(vm => vm.ForWhat);
 			set.Bind(forWhatfield).For(f => f.ErrorText).To(vm => vm.Errors["ForWhat"]);
 			set.Bind(forWhatErrorLabel).To(vm => vm.Errors["ForWhat"]);
+
+			set.Bind(moreMoneyField).To(vm => vm.MoreMoney);
+			set.Bind(moreMoneyField).For(f => f.ErrorText).To(vm => vm.Errors["MoreMoney"]);
+			set.Bind(moreMoneyErrorLabel).To(vm => vm.Errors["MoreMoney"]);
 
 			//set.Bind(button).To(vm => vm.GoCommand);
 			set.Apply();

@@ -25,14 +25,15 @@ namespace Validation.Core.ViewModels
 			get { return Errors.Count == 0; }
 		}
 
-		public override void RaisePropertyChanged(System.ComponentModel.PropertyChangedEventArgs changedArgs)
-		{
-			base.RaisePropertyChanged(changedArgs);
-			if (string.IsNullOrEmpty(changedArgs.PropertyName))
-				Validate();
-			else
-				ValidateProperty(changedArgs.PropertyName);
-		}
+		//uncomment to automatically fire validation when a field changes, remove the ValidateProperty calls
+		//public override void RaisePropertyChanged(System.ComponentModel.PropertyChangedEventArgs changedArgs)
+		//{
+		//	base.RaisePropertyChanged(changedArgs);
+		//	if (string.IsNullOrEmpty(changedArgs.PropertyName))
+		//		Validate();
+		//	else
+		//		ValidateProperty(changedArgs.PropertyName);
+		//}
 
 		protected void SetValidator<T>(Expression<Func<T>> propertyExpression, Func<string> validator)
 		{

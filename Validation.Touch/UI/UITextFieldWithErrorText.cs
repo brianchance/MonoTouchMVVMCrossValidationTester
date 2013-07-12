@@ -1,15 +1,19 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Drawing;
+using System.Linq;
+using System.Text;
 using MonoTouch.Foundation;
 using MonoTouch.UIKit;
 
 namespace Validation.Touch.UI
 {
-	//this class provides a base for editors that bind on end
-	[Register("MyUITextField")]
-	public class MyUITextField : UITextField
+	//This class is for providing feedback when binding normally
+	[Register("UITextFieldWithErrorText")]
+	public class UITextFieldWithErrorText : UITextField
 	{
-		public MyUITextField(RectangleF frame):base(frame)
+		public UITextFieldWithErrorText(RectangleF frame)
+			: base(frame)
 		{
 		}
 
@@ -39,6 +43,5 @@ namespace Validation.Touch.UI
 				}
 			}
 		}
-
 	}
 }

@@ -28,6 +28,20 @@ namespace Validation.Core.ViewModels
 						                            return "This field is required";
 					                            return string.Empty;
 				                            });
+
+			SetValidator(() => MoreMoney, () =>
+				                              {
+					                              if (string.IsNullOrEmpty(MoreMoney))
+						                              return "This field is required";
+
+					                              decimal value;
+					                              if (!Decimal.TryParse(MoreMoney, out value))
+						                              return "Invalid currency value";
+
+					                              if (value > 10)
+						                              return "Must be less than 10";
+					                              return string.Empty;
+				                              });
 		}
 
 		private decimal? _someMoney;
@@ -38,7 +52,7 @@ namespace Validation.Core.ViewModels
 			{
 				_someMoney = value;
 				RaisePropertyChanged(() => SomeMoney);
-				//ValidateProperty(() => SomeMoney);
+				ValidateProperty(() => SomeMoney);
 			}
 		}
 
@@ -50,7 +64,19 @@ namespace Validation.Core.ViewModels
 			{
 				_forWhat = value; 
 				RaisePropertyChanged(() => ForWhat);
-				//ValidateProperty(() => ForWhat);
+				ValidateProperty(() => ForWhat);
+			}
+		}
+
+		private string _moreMoney;
+		public string MoreMoney
+		{
+			get { return _moreMoney; }
+			set
+			{
+				_moreMoney = value; 
+				RaisePropertyChanged(() => MoreMoney);
+				ValidateProperty(() => MoreMoney);
 			}
 		}
 

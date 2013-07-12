@@ -86,13 +86,13 @@
     <Compile Include="LinkerPleaseInclude.cs" />
     <Compile Include="Main.cs" />
     <Compile Include="AppDelegate.cs" />
-    <Compile Include="MainView.cs" />
+    <Compile Include="Views\MainView.cs" />
     <Compile Include="UI\MyUIErrorLabel.cs" />
     <Compile Include="UI\MyUIMoneyTextField.cs" />
     <Compile Include="UI\MyUITextField.cs" />
     <Compile Include="UI\MyUITextFieldTextDidEndTargetBinding.cs" />
     <Compile Include="Setup.cs" />
-    <Compile Include="Views\FirstView.cs" />
+    <Compile Include="UI\UITextFieldWithErrorText.cs" />
     <None Include="Info.plist" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <None Include="packages.config" />
@@ -150,7 +150,6 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Content Include="AppDelegate.cs.txt" />
     <Content Include="ToDo-MvvmCross\_ Touch UI.txt" />
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath)\Xamarin\iOS\Xamarin.MonoTouch.CSharp.targets" />

@@ -28,19 +28,19 @@ namespace Validation.Touch.UI
 			return ok;
 		}
 
-		//public override bool ShouldChangeCharacters(UITextField textField, NSRange range, string replacementString)
-		//{
-		//	if (string.IsNullOrEmpty(replacementString))
-		//		return true;
+		public override bool ShouldChangeCharacters(UITextField textField, NSRange range, string replacementString)
+		{
+			if (string.IsNullOrEmpty(replacementString))
+				return true;
 
-		//	var newText = (textField.Text ?? "").Remove(range.Location, range.Length)
-		//					 .Insert(range.Location, replacementString);
-		//	//MvxTrace.Trace(
-		//	//	"ShouldChangeCharacters, before: {0}, replace: {1}, newtext: {2}",
-		//	//	this.Text, replacementString, newText);
+			var newText = (textField.Text ?? "").Remove(range.Location, range.Length)
+							 .Insert(range.Location, replacementString);
+			//MvxTrace.Trace(
+			//	"ShouldChangeCharacters, before: {0}, replace: {1}, newtext: {2}",
+			//	this.Text, replacementString, newText);
 
-		//	return IsOk(newText);
-		//}
+			return IsOk(newText);
+		}
 
 		public override bool ShouldEndEditing(UITextField textField)
 		{
