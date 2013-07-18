@@ -50,12 +50,16 @@ namespace Validation.Core.ViewModels
 			return IsValid;
 		}
 
-		internal bool ValidateProperty(string propertyName, Func<string> validator)
+		private bool ValidateProperty(string propertyName, Func<string> validator)
 		{
 			var errorMessage = validator();
-			Errors[propertyName] = errorMessage;
+			var valid = string.IsNullOrEmpty(errorMessage);
+			if (valid)
+				Errors.Remove(propertyName);
+			else
+				Errors[propertyName] = errorMessage;
 			RaisePropertyChanged(() => IsValid);
-			return string.IsNullOrEmpty(errorMessage);
+			return valid;
 		}
 
 		protected bool ValidateProperty(string propertyName)
@@ -73,6 +77,16 @@ namespace Validation.Core.ViewModels
 			return ValidateProperty(propertyName);
 		}
 
+		protected void RaisePropertyChangedAndValidateProperty(string propertyName)
+		{
+			RaisePropertyChanged(propertyName);
+			ValidateProperty(propertyName);
+		}
 
+		protected void RaisePropertyChangedAndValidateProperty<T>(Expression<Func<T>> propertyExpression)
+		{
+			var propertyName = this.GetPropertyNameFromExpression(propertyExpression);
+			RaisePropertyChangedAndValidateProperty(propertyName);
+		}
 	}
 }
